@@ -78,11 +78,14 @@ try:
      N.append([t,[]])
      a=len(N)-1;sv(N,a)
    elif c=="d" and N:
-    if input("Del?y/n:").lower()=="y":
-     N.pop(a)
-     if a>=len(N):
-      a=max(0,len(N)-1)
-     sv(N,a)
+    x=input("Note#:")
+    if x and x in "123456789":
+     x=int(x)-1
+     if x<len(N):
+      N.pop(x)
+      if a>=len(N):
+       a=max(0,len(N)-1)
+      sv(N,a)
    elif c=="r" and N:
     t=input("Name:")
     if t:N[a][0]=t;sv(N,a)
