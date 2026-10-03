@@ -35,6 +35,18 @@ def hd(t,x,n):
  mx=W-len(h)-2
  if len(t)>mx:t=t[:mx-2]+".."
  print(" "+t+" "+h)
+def wr(p,s):
+ m=W-len(p);o=[];c=""
+ for w in s.split(" "):
+  while len(w)>m:
+   if c:o.append(c);c=""
+   o.append(w[:m]);w=w[m:]
+  if not c:c=w
+  elif len(c)+1+len(w)<=m:c+=" "+w
+  else:o.append(c);c=w
+ o.append(c)
+ for j in range(len(o)):
+  print((p if j==0 else " "*len(p))+o[j])
 N,a=ld()
 md=0
 try:
@@ -63,7 +75,7 @@ try:
    if not n[1]:print(" (empty)")
    else:
     for i in range(len(n[1])):
-     print(str(i+1)+". "+n[1][i])
+     wr(str(i+1)+". ",n[1][i])
    print("-"*W)
    print("+:add D:del E:edt")
    print("C:clr N:nts Q:quit")
