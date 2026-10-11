@@ -9,7 +9,10 @@ def sv(N,a):
   for l in n[1]:s+="\n"+l
  e=[ord(c) for c in s]
  for p in range(5):ts.store_list(K[p],e[p*999:p*999+999] or [0])
-def ld():
+def ok(v):
+ try:return v==int(v) and (v>31 or v==10) and v<1114112
+ except:return 0
+def ld(f=0):
  e=[]
  for k in K:
   try:
@@ -17,17 +20,19 @@ def ld():
    if c!=[0]:e+=c
   except:pass
  if not e:return [],0
- try:
-  s=""
-  for v in e:
-   if v!=int(v) or v<32 and v!=10:return
-   s+=chr(int(v))
-  e=0;b=s.split("\n\n");N=[]
-  for t in b[1:]:
-   l=t.split("\n");N.append([l[0],l[1:]])
-  a=int(b[0])
-  if 0<=a<max(1,len(N)):return N,a
- except:pass
+ s=""
+ for v in e:
+  if not ok(v):
+   if not f:return
+   v=63
+  s+=chr(int(v))
+ e=0;b=s.split("\n\n");N=[]
+ for t in b[1:]:
+  l=t.split("\n");N.append([l[0],l[1:]])
+ try:a=int(b[0])
+ except:a=-1
+ if 0<=a<max(1,len(N)):return N,a
+ if f:return N,0
 def cl():print("\n"*11+"="*W)
 def gi(p,n):
  x=input(p)
@@ -47,10 +52,11 @@ def wr(p,s):
   print((p if j==0 else " "*len(p))+o[j])
 r=ld()
 if not r:
- cl();print(" DATA CORRUPTION\n DETECTED!\n"+D+"\n Format lists?\n (wipes all notes)")
+ cl();print(" DATA CORRUPTION\n DETECTED!\n"+D+"\n Format lists?\n y:wipe all notes\n n:fix bad values")
  if input("y/n:").lower()=="y":
   for k in K:ts.store_list(k,[0])
   r=[],0
+ else:r=ld(1)
 N,a=r or (None,0)
 md=0
 try:
